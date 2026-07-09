@@ -14,8 +14,8 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 
-    implementation("com.badlogicgames.gdx:gdx-freetype:1.13.1")
-    implementation("com.badlogicgames.gdx:gdx:1.13.1")
+    implementation("com.badlogicgames.gdx:gdx-freetype:1.14.2")
+    implementation("com.badlogicgames.gdx:gdx:1.14.2")
 
     implementation("net.onedaybeard.artemis:artemis-odb:2.3.0")
 
