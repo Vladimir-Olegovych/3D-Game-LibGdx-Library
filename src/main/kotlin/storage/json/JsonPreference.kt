@@ -19,6 +19,7 @@ class JsonPreference<P>(
     }
 
     fun setPreference(preference: P){
+        preferenceFile.parentFile?.mkdirs()
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(preferenceFile, preference)
     }
 }
