@@ -3,8 +3,9 @@ package com.gigapi.kryo
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryonet.Listener
 import com.esotericsoftware.kryonet.Server
+import com.gigapi.effects.DisposableEffect
 
-class GameServer(private val bufferSize: Int) {
+class GameServer(private val bufferSize: Int): DisposableEffect {
 
     private var server: Server? = null
 
@@ -33,7 +34,7 @@ class GameServer(private val bufferSize: Int) {
     }
 
 
-    fun dispose() {
+    override fun dispose() {
         server?.dispose()
         server = null
     }

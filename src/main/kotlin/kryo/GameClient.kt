@@ -3,8 +3,9 @@ package com.gigapi.kryo
 import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryonet.Client
 import com.esotericsoftware.kryonet.Listener
+import com.gigapi.effects.DisposableEffect
 
-class GameClient(private val bufferSize: Int) {
+class GameClient(private val bufferSize: Int): DisposableEffect {
 
     private var client: Client? = Client(bufferSize, bufferSize)
 
@@ -32,6 +33,11 @@ class GameClient(private val bufferSize: Int) {
             this.client?.dispose()
             this.client = null
         }
+    }
+
+    override fun dispose() {
+        client?.dispose()
+        client = null
     }
 
     companion object {
