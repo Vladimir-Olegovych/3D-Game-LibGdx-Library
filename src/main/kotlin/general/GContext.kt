@@ -7,19 +7,19 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.collections.component2
 import kotlin.collections.set
 
-class Context: DisposableEffect {
+class GContext: DisposableEffect {
 
     val objectMap = ConcurrentHashMap<IdentityObjectKey, IdentityObjectValue>()
 
-    fun removeContext(context: Context) {
-        context.objectMap.forEach { (key, value) ->
-            this@Context.objectMap.remove(key, value)
+    fun removeContext(gContext: GContext) {
+        gContext.objectMap.forEach { (key, value) ->
+            this@GContext.objectMap.remove(key, value)
         }
     }
 
-    fun addContext(context: Context) {
-        context.objectMap.forEach { (key, value) ->
-            this@Context.objectMap[key] = IdentityObjectValue(
+    fun addContext(gContext: GContext) {
+        gContext.objectMap.forEach { (key, value) ->
+            this@GContext.objectMap[key] = IdentityObjectValue(
                 anObject = value.anObject,
                 launched = value.launched,
                 fromOtherContext = true

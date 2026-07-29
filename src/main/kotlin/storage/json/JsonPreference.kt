@@ -1,25 +1,32 @@
 package com.gigapi.storage.json
 
+import com.badlogic.gdx.Gdx
 import com.fasterxml.jackson.databind.ObjectMapper
-import java.io.File
 
 class JsonPreference<P>(
     private val preferenceName: String,
     private val defaultPreference: P
 ) {
-    private val preferenceFile = File("$preferenceName.json")
     private val objectMapper = ObjectMapper()
 
+    private fun handle() = Gdx.files.local("$preferenceName.json")
+
     fun getPreference(): P {
-        if (!preferenceFile.exists()) {
+        val handle = handle()
+        if (!handle.exists() || handle.length() == 0L) {
             setPreference(defaultPreference)
             return defaultPreference
         }
-        return objectMapper.readValue(preferenceFile, defaultPreference!!::class.java)
+        return handle.read().use { input ->
+            objectMapper.readValue(input, defaultPreference!!::class.java)
+        }
     }
 
-    fun setPreference(preference: P){
-        preferenceFile.parentFile?.mkdirs()
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(preferenceFile, preference)
+    fun setPreference(preference: P) {
+        val handle = handle()
+        handle.parent().mkdirs()
+        handle.write(false).use { output ->
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(output, preference)
+        }
     }
 }

@@ -12,6 +12,7 @@ repositories {
 dependencies {
     implementation(kotlin("reflect"))
 
+    implementation("com.esotericsoftware:kryonet:2.22.0-RC1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 
     implementation("com.badlogicgames.gdx:gdx-freetype:1.14.2")

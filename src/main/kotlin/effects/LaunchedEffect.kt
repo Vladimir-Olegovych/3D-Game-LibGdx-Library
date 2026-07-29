@@ -1,7 +1,7 @@
 package com.gigapi.effects
 
-import com.gigapi.general.Context
+import com.gigapi.general.GContext
 
 interface LaunchedEffect {
-    fun launch(context: Context)
+    fun launch(gContext: GContext)
 }

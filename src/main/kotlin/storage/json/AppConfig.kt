@@ -2,7 +2,7 @@ package com.gigapi.storage.json
 
 import com.gigapi.effects.DisposableEffect
 import com.gigapi.effects.LaunchedEffect
-import com.gigapi.general.Context
+import com.gigapi.general.GContext
 
 class AppConfig<P>(configName: String, default: P): LaunchedEffect, DisposableEffect {
 
@@ -11,7 +11,7 @@ class AppConfig<P>(configName: String, default: P): LaunchedEffect, DisposableEf
 
     fun getConfig(): P = value
 
-    override fun launch(context: Context) {
+    override fun launch(gContext: GContext) {
         value = jsonPreference.getPreference()
     }
 
