@@ -27,6 +27,15 @@ class GContext: DisposableEffect {
         }
     }
 
+    inline fun <reified T>getRawObject(): T {
+        val key = IdentityObjectKey(
+            objectClass = T::class.java
+        )
+        val mapObj = objectMap[key]!!
+        val obj = mapObj.anObject as T
+        return obj
+    }
+
     inline fun <reified T>getObject(): T {
         val key = IdentityObjectKey(
             objectClass = T::class.java
@@ -39,6 +48,17 @@ class GContext: DisposableEffect {
         }
         return obj
     }
+
+    inline fun <reified T>getRawObject(customKey: String): T {
+        val key = IdentityObjectKey(
+            objectClass = T::class.java,
+            customKey = customKey
+        )
+        val mapObj = objectMap[key]!!
+        val obj = mapObj.anObject as T
+        return obj
+    }
+
 
     inline fun <reified T>getObject(customKey: String): T {
         val key = IdentityObjectKey(

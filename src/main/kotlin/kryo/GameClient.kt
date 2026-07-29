@@ -21,7 +21,10 @@ class GameClient(private val bufferSize: Int): DisposableEffect {
         client?.removeListener(listener)
     }
 
-    fun start(address: String, port: Int, custom: (Kryo) -> Unit){
+    fun start(address: String, port: Int,
+              custom: (Kryo) -> Unit,
+              onConnectionFailed: () -> Unit
+    ){
         val client = client ?: return
         val kryo = client.kryo
         custom.invoke(kryo)
@@ -32,6 +35,7 @@ class GameClient(private val bufferSize: Int): DisposableEffect {
         } catch (e: Throwable) {
             this.client?.dispose()
             this.client = null
+            onConnectionFailed.invoke()
         }
     }
 
