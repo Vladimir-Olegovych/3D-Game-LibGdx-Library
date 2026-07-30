@@ -21,6 +21,14 @@ class GameClient(private val bufferSize: Int): DisposableEffect {
         client?.removeListener(listener)
     }
 
+    fun sendTCP(obj: Any) {
+        client?.sendTCP(obj)
+    }
+
+    fun sendUDP(obj: Any) {
+        client?.sendUDP(obj)
+    }
+
     fun start(address: String, port: Int,
               custom: (Kryo) -> Unit,
               onConnectionFailed: () -> Unit
