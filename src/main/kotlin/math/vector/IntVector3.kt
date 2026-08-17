@@ -5,6 +5,15 @@ import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 data class IntVector3(var x: Int = 0, var y: Int = 0, var z: Int = 0) {
+
+    fun add(intVector3: IntVector3): IntVector3 {
+        return IntVector3(
+            x = this.x + intVector3.x,
+            y = this.y + intVector3.y,
+            z = this.z + intVector3.z
+        )
+    }
+
     companion object {
         fun dst(v1: IntVector3, v2: IntVector3): Float {
             val a = v2.x - v1.x
