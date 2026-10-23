@@ -1,7 +1,5 @@
 package com.gigapi.eventbus
 
-import com.badlogic.gdx.utils.Queue
-import java.util.LinkedList
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.reflect.KClass
 
