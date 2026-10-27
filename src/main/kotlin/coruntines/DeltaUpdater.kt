@@ -33,10 +33,13 @@ abstract class DeltaUpdater(
         lifecycleScope.cancel()
     }
 
-    fun start() {
+    fun start(blockingInitialize: Boolean = true) {
         if (isRunning) return
+        if (blockingInitialize) {
+            runBlocking { lifecycleScope.async { create() }.await() }
+        }
         job = lifecycleScope.launch {
-            create()
+            if (!blockingInitialize) create()
             isRunning = true
             lastTime = System.nanoTime()
             while (isRunning) update()
