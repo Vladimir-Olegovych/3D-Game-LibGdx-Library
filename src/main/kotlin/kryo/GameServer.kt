@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo
 import com.esotericsoftware.kryonet.Listener
 import com.esotericsoftware.kryonet.Server
 import com.gigapi.effects.DisposableEffect
+import java.net.InetSocketAddress
 
 class GameServer(private val bufferSize: Int): DisposableEffect {
 
@@ -26,8 +27,8 @@ class GameServer(private val bufferSize: Int): DisposableEffect {
         val kryo = server.kryo
         custom.invoke(kryo)
 
-        //server.bind(InetSocketAddress("0.0.0.0", port), InetSocketAddress("0.0.0.0", port))
-        server.bind(port, port)
+        server.bind(InetSocketAddress("0.0.0.0", port), InetSocketAddress("0.0.0.0", port))
+        //server.bind(port, port)
         server.start()
 
         this.server = server

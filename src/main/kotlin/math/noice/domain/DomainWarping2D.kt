@@ -16,6 +16,7 @@ class DomainWarping2D(
 
     fun generateDomainNoise(x: Int, z: Int, defaultNoiseSettings: NoiseSettings): Float {
         val domainOffset = generateDomainOffset(x, z)
+
         return noiceGenerator.noice(
             x + domainOffset.x,
             z + domainOffset.y,
@@ -24,13 +25,39 @@ class DomainWarping2D(
     }
 
     fun generateDomainOffset(x: Int, z: Int): Vector2 {
-        val noiseX = noiceGenerator.noice(x.toFloat(), z.toFloat(), noiseDomainX) * amplitudeX
-        val noiseY = noiceGenerator.noice(x.toFloat(), z.toFloat(), noiseDomainY) * amplitudeY
+        val noiseX = noiceGenerator.noice(
+            x.toFloat(),
+            z.toFloat(),
+            noiseDomainX
+        ) * amplitudeX
+
+        val noiseY = noiceGenerator.noice(
+            x.toFloat(),
+            z.toFloat(),
+            noiseDomainY
+        ) * amplitudeY
+
         return Vector2(noiseX, noiseY)
     }
 
     fun generateDomainOffsetInt(x: Int, z: Int): IntVector2 {
         val offset = generateDomainOffset(x, z)
-        return IntVector2(offset.x.roundToInt(), offset.y.roundToInt())
+
+        return IntVector2(
+            offset.x.roundToInt(),
+            offset.y.roundToInt()
+        )
+    }
+
+    fun warpedX(x: Int, z: Int): Float {
+        return generateDomainOffset(x, z).x
+    }
+
+    fun warpedZ(x: Int, z: Int): Float {
+        return generateDomainOffset(x, z).y
+    }
+
+    fun warped(x: Int, z: Int): Vector2 {
+        return generateDomainOffset(x, z)
     }
 }

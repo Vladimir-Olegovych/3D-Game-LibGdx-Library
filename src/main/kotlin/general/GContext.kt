@@ -49,6 +49,19 @@ class GContext: DisposableEffect {
         return obj
     }
 
+    inline fun <reified T>getObjectOrNull(): T? {
+        val key = IdentityObjectKey(
+            objectClass = T::class.java
+        )
+        val mapObj = objectMap[key]
+        val obj = mapObj?.anObject as? T
+        if(obj is LaunchedEffect && !mapObj.launched && !mapObj.fromOtherContext) {
+            mapObj.launched = true
+            obj.launch(this)
+        }
+        return obj
+    }
+
     inline fun <reified T>getRawObject(customKey: String): T {
         val key = IdentityObjectKey(
             objectClass = T::class.java,

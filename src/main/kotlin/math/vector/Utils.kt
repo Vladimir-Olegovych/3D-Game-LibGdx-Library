@@ -1,5 +1,6 @@
 package com.gigapi.math.vector
 
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.math.Vector3
 
 fun IntVector3.roundToFloat(): Vector3 {
@@ -7,5 +8,12 @@ fun IntVector3.roundToFloat(): Vector3 {
         this.x.toFloat(),
         this.y.toFloat(),
         this.z.toFloat(),
+    )
+}
+
+fun IntVector2.roundToFloat(): Vector2 {
+    return Vector2(
+        this.x.toFloat(),
+        this.y.toFloat(),
     )
 }
